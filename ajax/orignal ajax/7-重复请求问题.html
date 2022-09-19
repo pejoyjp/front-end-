@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重复请求</title>
+</head>
+<body>
+    <button>发送</button>
+    <button>取消</button>
+    <script>
+        const btns = document.querySelectorAll('button')
+        let x = null
+        //标识一个变量
+        let isSending = false //是否正在发送ajax请求
+
+
+        btns[0].onclick = () =>{
+            if(isSending) x.abort()
+            x = new XMLHttpRequest
+            //修改标识变量的值
+            isSending = true
+            x.open('GET','http://127.0.0.1:8000/delay')
+            //取消请求
+            x.send()
+            x.onreadystatechange = () =>{
+                if(x.readyState === 4){
+                    //修改标识
+                    isSending = false
+                }
+            }
+        }
+        //abort
+        btns[1].onclick=()=>{
+            x.abort()
+        }
+    </script>
+</body>
+</html>
