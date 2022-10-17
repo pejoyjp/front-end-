@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+            /*
+            let p1 = Promise.resolve(51) //返回一个promise对象
+            //如果传入的参数为 非promise类型的对象，则返回的结果是一个成功的promise对象
+            console.log(p1)
+            //如果传入 primise对象，则参数的结果决定了resolve的结果
+            let p2 = Promise.resolve(new Promise((resolve,reject)=>{
+                reject('ok')
+            }))
+            console.log(p2)
+            p2.catch(reason=>{
+                console.log(reason)
+            })
+            */
+           let p1 = Promise.reject(123)
+           console.log(p1)
+            
+        </script>
+    
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = new Promise((resolve,reject)=>{
+            resolve('ok')
+        })
+        let p2 = Promise.resolve('success')
+        let p3 = Promise.resolve('oh yes')
+        //全部成功，将所有成功的结果保存在promise的数组里；有一个失败就失败
+        const result = Promise.all([p1,p2,p3])
+        console.log(result)
+
+        //race 谁最先改变，race的结果就是谁 
+        //如果给p1加一个定时器，p2先运行，结果就是P2
+        const result1 = Promise.race([p1,p2,p3])
+        console.log(result)
+    </script>
+    
+</body>
+</html>

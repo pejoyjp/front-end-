@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <div id="container">
+        <h2 class="page-header">默认</h2>
+        <button type="button" class="btn btn-primary">GET</button>
+        <button type="button" class="btn btn-secondary">POST</button>
+        <button type="button" class="btn btn-success">PUT</button>
+        <button type="button" class="btn btn-danger">DELETE</button>
+    </div>  
+    <script>
+        const btns = document.querySelectorAll('button')
+        //默认设置
+        axios.defaults.method = 'GET'
+        axios.defaults.baseURL = 'http://localhost:3000/'
+        axios.defaults.timeout = 3000 //3s之内，没结果，取消请求
+        btns[0].onclick=()=>{
+            axios.request({
+                url:'comments'
+            }).then(response=>{
+                console.log(response)
+            })
+        }
+    </script>
+  </body>
+  
+
+</html> 

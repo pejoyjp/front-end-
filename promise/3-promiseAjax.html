@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-header">
+            Promise封装AJAX
+        </h2>
+        <button class="btn btn-primary" id="btn">点击抽奖</button>
+    </div>
+    <script>
+        const btn = document.querySelector('#btn')
+        btn.addEventListener('click',()=>{
+            const p = new Promise((resolve,reject)=>{
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET','https://www.fastmock.site/mock/49ef0bc037b5144cb7d523ceed2742f9/_jin/getUserList')
+                xhr.send()
+                xhr.onreadystatechange = () =>{
+                    if(xhr.readyState === 4){
+                        if(xhr.status>=200 && xhr.status <300){
+                            //控制输出响应体
+                            resolve(xhr.response)
+                        }else{
+                            //输出响应状态码
+                            reject(xhr.status)
+                        }
+                    }
+                }
+            })
+            p.then(value=>{
+                console.log(value)
+            },reason=>{
+                console.warn(reason)
+            })
+            
+        })
+    </script>
+    
+</body>
+</html>
