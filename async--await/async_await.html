@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            function fn(){
+                return new Promise(resolve=>{
+                    resolve(10)
+                })
+            }
+            fn().then(num=>console.log(num))
+            console.log("这是调用后的打印1")
+            
+            /*
+            在js中，可以通过async关键字快速的创建异步函数
+                1. async声明的异步函数，他的返回值会自动包装为Promise
+                2. async声明的异步函数可以使用await来调用其他异步函数
+            
+            await 
+                调用异步函数时，可以直接在函数前使用await关键字来进行调用
+                    调用await之后，他会等待Promise执行出结果，结果将结果返回，
+                    可以通过变量接受结果
+                    注意：await并不是将异步函数转变为同步函数，只是改变的异步函数的调用方式
+                        所有，await不是在哪里都能用
+                        当我们使用了await，catch方法就不能调用了，只能通过try catch来处理异常
+                    await使用的位置
+                        1.async声明的异步函数中可以使用await
+                        2.可以在模块的外层作用域中使用await
+            */
+            async function fn2(){
+                    return 10
+            }
+            async function fn3(num){
+                    return num + 10
+            }
+            async function fn4(num){
+                    return num + 11
+            }
+            async function fn5(num){
+                    return num + 15
+            }
+            //调用异步函数
+            fn2()
+                .then(fn3)
+                .then(fn4)
+                .then(fn5)
+                .then('async的' + console.log)
+                .catch(e=>console.log('出错了'))
+
+            //不加await就是同步代码
+            async function fn6(){
+                try{
+                    let result = await fn2()
+                    result = await fn3(result)
+                    result = await fn4(result)
+                    result = await fn5(result)
+                    console.log("await的" + result)
+                }catch (e){
+                    console.log('出错了');
+                }   
+            }
+
+            (async()=>{
+                try{
+                    let result = await fn2()
+                    result = await fn3(result)
+                    result = await fn4(result)
+                    result = await fn5(result)
+                    console.log("await的" + result)
+                }catch (e){
+                    console.log('出错了');
+                }  
+            })()
+            /*
+            可以通过修改script标签的属性
+            type = "module"
+            这样的话直接使用await
+            比如：
+            try{
+                    let result = await fn2()
+                    result = await fn3(result)
+                    result = await fn4(result)
+                    result = await fn5(result)
+                    console.log("await的" + result)
+                }catch (e){
+                    console.log('出错了');
+                }  
+
+            */
+
+            fn6()
+            //这说明fn6没有堵塞到下面的代码
+            console.log("这是调用后的打印2")
+            
+
+        </script>
+    </head>
+    <body>
+    
+    </body>
+</html>
